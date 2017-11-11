@@ -1,0 +1,57 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+void skaitymas(int &n,int Nr[],int M[],int S[],int D[],int T[],int B[],int Vt[]);
+void rasymas(int n,int Nr[],int M[],int S[],int D[],int T[],int B[],int Vt[]);
+int suma(int A[],int n);
+int did(int A[],int n);
+int maz(int A[],int n);
+int main()
+{
+    int n;//krepsininku kiekis
+    int Nr[13], M[13],S[13],D[13],T[13],B[13],Vt[13];
+    skaitymas(n,Nr,M,S,D,T,B,Vt);
+    rasymas(n,Nr,M,S,D,T,B,Vt);
+
+    return 0;
+}
+void skaitymas(int &n,int Nr[],int M[],int S[],int D[],int T[],int B[],int Vt[])
+{
+    ifstream in ("duom.txt");
+    in>>n;
+    for(int i=0;i<n;i++)
+    {
+        in>>Nr[i]>>M[i]>>S[i]>>D[i]>>T[i]>>B[i];
+        Vt[i]=D[i]*2+T[i]*3+B[i];
+    }
+
+    in.close();
+}
+void rasymas(int n,int Nr[],int M[],int S[],int D[],int T[],int B[],int Vt[])
+{
+    ofstream out("rez.txt");
+    cout<<Nr[did(Vt,n)]<<endl;
+    out.close();
+}
+int suma(int A[],int n)
+{
+    int s=0;
+    for(int i=0;i<n;i++)
+        s+=A[i];
+    return s;
+}
+int did(int A[],int n)
+{
+    int d=0;
+    for(int i=1;i<n;i++)
+        if(A[i]>A[d])d=i;
+    return d;
+}
+int maz(int A[],int n)
+{
+    int d=0;
+    for(int i=1;i<n;i++)
+        if(A[i]<A[d])d=i;
+    return d;
+}
