@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int DBD(int sesuo, int brolis);
+
+int main()
+{
+    int brolis ,sesuo, MBK;
+    cout<<"Iveskite brolio zingsnio ilgi: ";
+    cin>>brolis;
+    cout<<"Iveskite sesers zingsnio ilgi: ";
+    cin>>sesuo;
+    MBK = sesuo / DBD(sesuo, brolis) * brolis;
+    cout<<MBK*7;
+    return 0;
+}
+
+int DBD(int sesuo, int brolis)
+{
+    while (brolis != 0)
+   {     
+            liekana = sesuo % brolis;
+            sesuo = brolis;           
+            brolis = liekana;     
+   } 
+   
+return sesuo;
+}
