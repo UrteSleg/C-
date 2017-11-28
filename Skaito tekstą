@@ -1,0 +1,49 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+void nuskaitymas(int &sk, int &r, int &sum, int &z, int &lt);
+void rasymas(int sk,int r, int sum, int z, int lt);
+
+int main()
+{
+    setlocale(LC_ALL, "Lithuanian");
+    int sk=0, r=0, sum=0, lt=0, z=0;
+    nuskaitymas(sk,r,sum,z,lt);
+    rasymas(sk,r,sum,z,lt);
+    return 0;
+}
+
+void nuskaitymas(int &sk, int &r, int &sum, int &z, int &lt)
+{
+    ifstream in ("duom.txt");
+    char s;
+    char A[]="àèæëáðøûþÀÈÆËÁÐØÛÞ";
+    int n=18;
+    while(!in.eof())
+    {
+        in.get(s);
+        if(!in.eof() && s>='0' && s<='9')
+            {
+                sk++;
+                sum+=(s-'0');
+            }
+        else if(!in.eof() && (((s>='a') && (s<='z')) || ((s>='A') && (s<='Z')))) r++;
+            else if(!in.eof() && s==' ')z++;
+       for(int i=0; i<n; i++)
+           if(!in.eof() && s==A[i]) lt++;
+    }
+    in.close();
+}
+
+void rasymas(int sk, int r, int sum, int z, int lt)
+{
+    ofstream out("rez.txt");
+    out<<"Lotyniškų raidžių kiekis tekste:"<< r <<endl;
+    out<<"Skaitmenų kiekis tekste: "<< sk <<endl;
+    out<<"Skaitmenų suma:"<< sum<<endl;
+    out<<"Lietuviškų raidžių kiekis tekste:"<<lt<<endl;
+    out<<"Žodžių kiekis tekste:"<<z+1<<endl;
+    out.close();
+}
